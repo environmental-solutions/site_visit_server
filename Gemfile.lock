@@ -150,7 +150,7 @@ DEPENDENCIES
   pg
   puma (~> 3.7)
   rails (~> 5.1.4)
-  rspec-rails
+  rspec-rails (~> 3.6)
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
