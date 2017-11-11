@@ -10,9 +10,14 @@ Types::QueryType = GraphQL::ObjectType.define do
   # end
 
   # queries are just represented as fields
-  field :allProjects, !types[Types::ProjectType] do
+  field :projects, !types[Types::ProjectType] do
     # resolve would be called in order to fetch data for that field
     resolve -> (obj, args, ctx) { Project.all }
+  end
+
+  field :sites, !types[Types::SiteType] do
+    # resolve would be called in order to fetch data for that field
+    resolve -> (obj, args, ctx) { Site.all }
   end
 
 end
