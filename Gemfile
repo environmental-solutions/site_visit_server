@@ -11,6 +11,7 @@ gem 'pg'
 
 gem 'devise'
 gem 'graphql'
+gem 'rack-cors'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
