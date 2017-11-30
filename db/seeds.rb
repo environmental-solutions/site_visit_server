@@ -7,12 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 #
 
-project = Project.where({name: 'Project 1'}).first_or_create
+project = Project.where({name: 'Trump Foundation'}).first_or_create
 
-site1 = Site.where({name: 'Site 1', description: 'Site 1 description'}).first_or_create
-site2 = Site.where({name: 'Site 2', description: 'Site 2 description'}).first_or_create
+site1 = Site.where({name: 'Trump Towner', description: 'Manhattan Tower'}).first_or_create
+site2 = Site.where({name: 'Panama Hotel', description: 'Money Laundering Hotel'}).first_or_create
 
 project.sites << site1
 project.sites << site2
 
-
+project = Project.where({name: 'Mar-a-Lago'}).first_or_create
