@@ -9,12 +9,12 @@ Types::MutationType = GraphQL::ObjectType.define do
     }
   end
 
-  field :createProject, !types[Types::ProjectType] do
+  field :createProject, Types::ProjectType do
     description "Create a project with a name and description"
     argument :project, ProjectInputType
     resolve ->(t, args, c) {
       puts "called create_project on server"
-      Project.create!(args[:project])
+      Project.create!(args[:project].to_h)
     }
   end
 
