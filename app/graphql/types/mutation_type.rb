@@ -28,7 +28,4 @@ ProjectInputType = GraphQL::InputObjectType.define do
     description "Name of the project."
   end
 
-  argument :description, types.String do
-    description "Description of the project."
-  end
 end
