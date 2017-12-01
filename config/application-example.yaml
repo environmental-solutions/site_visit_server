@@ -1,0 +1,6 @@
+CORS_ORIGIN: xxx
+
+DB_HOST: xxx
+DB_NAME: xxx
+DB_USER: xxx
+DB_PASSWORD: xxx
