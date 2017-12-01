@@ -5,17 +5,17 @@ default: &default
 development:
   <<: *default
   adapter: postgresql
-  database: site_visit_dev
-  username: site_visit_user
-  password:
+  database: <%= ENV['DB_NAME'] %>
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
   host: localhost
 
 development_docker:
   <<: *default
   adapter: postgresql
-  database: site_visit_dev
-  username: postgres
-  password: <%= ENV['DB_PASSWORD'] || '' %>
+  database: <%= ENV['DB_NAME'] %>
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
   host: db
 
 # Warning: The database defined as "test" will be erased and
