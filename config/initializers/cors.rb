@@ -17,7 +17,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors, debug: true, lo
 
   if ENV['CORS_ORIGIN2']
     allow do
-      origins "#{ENV['CORS_ORIGI2']}"
+      origins "#{ENV['CORS_ORIGIN2']}"
       resource '*',
        headers: :any,
        credentials: true,
@@ -25,11 +25,11 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors, debug: true, lo
     end
   end
 
-  allow do
-    origins "http://localhost:4000"
-    resource '*',
-     headers: :any,
-     credentials: true,
-     methods: [:get, :post, :options, :delete, :put, :patch]
-  end
+  # allow do
+  #   origins "http://localhost:4000"
+  #   resource '*',
+  #    headers: :any,
+  #    credentials: true,
+  #    methods: [:get, :post, :options, :delete, :put, :patch]
+  # end
 end
