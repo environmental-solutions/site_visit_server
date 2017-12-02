@@ -12,8 +12,6 @@
 
 
 
-CORS_ORIGIN: "dev.ddx"
-
 development:
   DB_HOST: localhost
   DB_NAME: site_visit_dev
