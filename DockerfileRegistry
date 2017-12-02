@@ -7,4 +7,4 @@ RUN mkdir -p /app
 WORKDIR /app
 COPY . .
 
-RUN bundle
+RUN bundle install
