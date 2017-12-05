@@ -6,15 +6,18 @@ module AuthMutations
 
     input_field :email, types.String
     input_field :password, types.String
+    # argument :login, LoginInputType
 
     return_field :token, types.String
     return_field :messages, types[FieldErrorType]
 
     resolve ->(obj, inputs, ctx) {
+      puts "inputs: email: #{inputs[:email]} password: #{inputs[:password]}"
       user = User.find_by(email: inputs[:email])
-      if user.present? && user.authenticate(inputs[:password])
-        user.update_tracked_fields(ctx[:request])
-        { token: user.generate_access_token! }
+      if user.present? && user.valid_password?(inputs[:password])
+        # user.update_tracked_fields(ctx[:request])
+        # session[:user_id] = user.id
+        { token: user.token }
       else
         FieldError.error("Invalid email or password")
       end
@@ -30,6 +33,17 @@ module AuthMutations
       ctx[:current_user].update(access_token: nil)
       {}
     })
+  end
+
+  LoginInputType = GraphQL::InputObjectType.define do
+    name "LoginInputType"
+    description "Login with email and password"
+    argument :email, !types.String do
+      description "Email"
+    end
+    argument :password, !types.String do
+      description "Password"
+    end
   end
 
 end
