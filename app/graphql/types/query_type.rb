@@ -20,4 +20,19 @@ Types::QueryType = GraphQL::ObjectType.define do
     resolve -> (obj, args, ctx) { Site.all }
   end
 
+  field :users, !types[Types::UserType] do
+    description "Current user"
+    resolve -> (obj, args, ctx) { User.all }
+    # resolve ->(obj, args, ctx) {
+    #   ctx[:current_user]
+    # }
+  end
+
+  field :viewer, !types[Types::UserType] do
+    description "Current user"
+    resolve ->(obj, args, ctx) {
+      ctx[:current_user]
+    }
+  end
+
 end
