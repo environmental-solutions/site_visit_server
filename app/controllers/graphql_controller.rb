@@ -1,4 +1,7 @@
 class GraphqlController < ApplicationController
+
+  before_action :authenticate!
+
   def execute
     variables = ensure_hash(params[:variables])
     query = params[:query]
@@ -12,6 +15,29 @@ class GraphqlController < ApplicationController
   end
 
   private
+
+  def current_user
+    # get token and compare to current user token
+    current_token = "foo"
+    @current_user = User.where("token = ", current_token).first
+  end
+
+  helper_method :current_user
+
+  def authenticate
+
+
+  end
+
+  def current_permission
+    @current_permission ||= Permission.new(current_user)
+  end
+
+  def authorize
+    if !current_permission.allow?(params[:controller], params[:action])
+      redirect_to root_url, alert: "Not authorized."
+    end
+  end
 
   # Handle form data, JSON body, or a blank value
   def ensure_hash(ambiguous_param)
@@ -30,4 +56,5 @@ class GraphqlController < ApplicationController
       raise ArgumentError, "Unexpected parameter: #{ambiguous_param}"
     end
   end
+
 end
