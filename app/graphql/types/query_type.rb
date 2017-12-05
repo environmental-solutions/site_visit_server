@@ -28,9 +28,9 @@ Types::QueryType = GraphQL::ObjectType.define do
     # }
   end
 
-  field :viewer, !types[Types::UserType] do
-    description "Current user"
-    resolve ->(obj, args, ctx) {
+  field :currentUser, Types::UserType do
+    description 'fetch the current user.'
+    resolve ->(object, args, ctx){
       ctx[:current_user]
     }
   end
