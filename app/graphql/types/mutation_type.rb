@@ -13,6 +13,8 @@ Types::MutationType = GraphQL::ObjectType.define do
     }
   end
 
+  field :signUp, field: UserMutations::SignUp.field
+
 end
 
 ProjectInputType = GraphQL::InputObjectType.define do
