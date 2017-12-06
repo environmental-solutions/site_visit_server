@@ -1,6 +1,6 @@
 class GraphqlController < ApplicationController
 
-  before_action :authenticate!
+  before_action :authenticate
 
   def execute
     variables = ensure_hash(params[:variables])
@@ -19,14 +19,28 @@ class GraphqlController < ApplicationController
   def current_user
     # get token and compare to current user token
     current_token = "foo"
-    @current_user = User.where("token = ", current_token).first
+    puts "checking current user out of #{User.all.count} users".red
+    @current_user = User.where("token = ?", current_token).first
   end
 
-  helper_method :current_user
-
   def authenticate
+    unless current_user
+      render(
+        json: {
+          message: 'Update Failed'
+        },
+        status: :unauthorized
+      )
+    end
+  end
 
-
+  def authenticate_fail
+    render(
+      json: {
+        message: 'Update Failed'
+      },
+      status: :unauthorized
+    )
   end
 
   def current_permission
