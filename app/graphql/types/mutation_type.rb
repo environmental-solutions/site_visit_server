@@ -3,6 +3,7 @@ Types::MutationType = GraphQL::ObjectType.define do
   name "Mutation"
 
   field :signIn, field: AuthMutations::SignIn.field
+  field :signOut, field: AuthMutations::SignOut.field
 
   field :createProject, Types::ProjectType do
     description "Create a project with a name and description"

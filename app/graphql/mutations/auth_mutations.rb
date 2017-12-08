@@ -28,6 +28,23 @@ module AuthMutations
     }
   end
 
+  SignOut = GraphQL::Relay::Mutation.define do
+    name "signOut"
+    description "sign out of current token-based session"
+    return_field :email, types.String
+    return_field :token, types.String
+    return_field :messages, types[FieldErrorType]
+
+    resolve ->(obj, inputs, ctx) {
+      puts "attempting to sign out #{ctx[:current_user]}"
+      ctx[:current_user].update(access_token: nil) if ctx[:current_user]
+      {
+        token: nil
+      }
+    }
+
+  end
+
   RevokeToken = GraphQL::Relay::Mutation.define do
     name "revokeToken"
     description "revoke token"
