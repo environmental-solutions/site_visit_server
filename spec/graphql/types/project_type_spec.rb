@@ -2,6 +2,8 @@ describe Types::ProjectType do
 
   let(:types) { GraphQL::Define::TypeDefiner.instance }
 
+  it { is_expected.to implement(Types::ActiveRecordInterface) }
+
   it 'defines a field of name of type String!' do
     expect(Types::ProjectType).to have_a_field(:name).that_returns('String!')
     expect(Types::ProjectType).to have_a_field(:name).that_returns(!types.String)
