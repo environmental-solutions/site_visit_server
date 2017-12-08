@@ -4,8 +4,8 @@ module AuthMutations
     name "signIn"
     description "SignIn"
 
-    input_field :email, types.String
-    input_field :password, types.String
+    input_field :email, !types.String
+    input_field :password, !types.String
     # argument :login, LoginInputType
 
     return_field :email, types.String
