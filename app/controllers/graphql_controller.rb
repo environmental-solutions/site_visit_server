@@ -3,6 +3,8 @@ class GraphqlController < ApplicationController
   before_action :authenticate
 
   def execute
+    puts "HEADER"
+    puts request.headers['Authorization']
     variables = ensure_hash(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
@@ -11,6 +13,7 @@ class GraphqlController < ApplicationController
       # current_user: current_user,
     }
     result = SiteVisitServerSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
+    puts "result: #{ap result}"
     render json: result
   end
 
@@ -18,13 +21,17 @@ class GraphqlController < ApplicationController
 
   def current_user
     # get token and compare to current user token
-    current_token = "foo"
+    return nil if request.headers['Authorization'].blank?
+    token = request.headers['Authorization'].split(' ').last
+    return nil if token.blank?
     puts "checking current user out of #{User.all.count} users".red
-    @current_user = User.where("token = ?", current_token).first
+    @current_user = User.where("token = ?", token).first
   end
 
   def authenticate
-    unless current_user
+    # is there a better way to only auth on non SignIn queries?
+    puts "SIGN IN NAME: #{params[:operationName]}"
+    unless current_user  ||params[:operationName] == "SignIn"
       render(
         json: {
           message: 'Update Failed'
