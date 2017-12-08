@@ -8,6 +8,7 @@ module AuthMutations
     input_field :password, types.String
     # argument :login, LoginInputType
 
+    return_field :email, types.String
     return_field :token, types.String
     return_field :messages, types[FieldErrorType]
 
@@ -17,7 +18,10 @@ module AuthMutations
       if user.present? && user.valid_password?(inputs[:password])
         # user.update_tracked_fields(ctx[:request])
         # session[:user_id] = user.id
-        { token: user.token }
+        {
+          token: user.token,
+          email: user.email
+        }
       else
         FieldError.error("Invalid email or password")
       end
