@@ -15,6 +15,14 @@ Types::QueryType = GraphQL::ObjectType.define do
     resolve -> (obj, args, ctx) { Project.all }
   end
 
+  field :project, Types::ProjectType do
+    argument :id, !types.ID
+    # resolve would be called in order to fetch data for that field
+    resolve -> (obj, args, ctx) {
+      Project.where("id = ?", args["id"]).first
+    }
+  end
+
   field :sites, !types[Types::SiteType] do
     # resolve would be called in order to fetch data for that field
     resolve -> (obj, args, ctx) { Site.all }

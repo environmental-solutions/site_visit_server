@@ -1,6 +1,6 @@
 Types::ProjectType = GraphQL::ObjectType.define do
 
-  name 'Project'
+  name('Project')
 
   interfaces [Types::ActiveRecordInterface]
   field :name, !types.String
