@@ -1,6 +1,6 @@
 class GraphqlController < ApplicationController
 
-  before_action :authenticate
+  # before_action :authenticate
 
   def execute
     puts "HEADER"
