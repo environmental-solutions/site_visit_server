@@ -11,6 +11,7 @@ gem 'pg'
 
 gem 'devise'
 gem 'graphql'
+gem 'graphiql-rails'
 gem 'rack-cors'
 gem 'figaro'
 
@@ -47,7 +48,6 @@ group :development do
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
   # graphql support
-  gem 'graphiql-rails'
   gem 'awesome_print'
 end
 
