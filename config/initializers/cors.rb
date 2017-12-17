@@ -7,6 +7,7 @@
     # origins 'localhost:4000'
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors, debug: true, logger: (-> { Rails.logger }) do
+  puts("clearing cors for #{ENV['CORS_ORIGIN']} and #{ENV['CORS_ORIGIN2']}")
   allow do
     origins "#{ENV['CORS_ORIGIN']}"
     resource '*',

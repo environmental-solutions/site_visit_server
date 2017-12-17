@@ -3,17 +3,18 @@ class GraphqlController < ApplicationController
   # before_action :authenticate
 
   def execute
-    puts "HEADER"
-    puts request.headers['Authorization']
+    # puts "HEADER in #{Rails.env}"
+    # puts request.headers['Authorization']
     variables = ensure_hash(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
+    # puts "variables: #{variables} query: #{query} operationname: #{operation_name}"
     context = {
       # Query context goes here, for example:
       # current_user: current_user,
     }
     result = SiteVisitServerSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
-    puts "result: #{ap result}"
+    # puts "result: #{ap result}"
     render json: result
   end
 
