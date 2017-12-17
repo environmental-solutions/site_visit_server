@@ -13,7 +13,7 @@ gem 'devise'
 gem 'graphql'
 gem 'graphiql-rails'
 gem 'rack-cors'
-gem 'figaro'
+gem 'dotenv'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
