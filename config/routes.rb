@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  if Rails.env.development?
+  if (Rails.env.include?('development'))
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
   end
 
